@@ -13,7 +13,7 @@ Deployed version: [chatjs.langchain.com](https://chatjs.langchain.com)
 
 ### Ingest
 1. Build the backend via `yarn build --filter=backend` (from root).
-2. Run the ingestion script by navigating into `./backend` and running `yarn ingest`.
+2. Run the ingestion script by navigating into `./backend` and running `yarn ingest:dev`.
 
 ### Frontend
 1. Navigate into `./frontend` and run `yarn dev` to start the frontend.
