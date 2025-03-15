@@ -6,7 +6,10 @@ import { RemoteRunnable } from "langchain/runnables/remote";
 import { applyPatch } from "@langchain/core/utils/json_patch";
 
 import { EmptyState } from "../components/EmptyState";
-import { ChatMessageBubble, Message } from "../components/ChatMessageBubble";
+import {
+  ChatMessageBubble,
+  type Message,
+} from "../components/ChatMessageBubble";
 import { AutoResizeTextarea } from "./AutoResizeTextarea";
 import { marked } from "marked";
 import { Renderer } from "marked";
@@ -48,7 +51,7 @@ export function ChatWindow(props: { conversationId: string }) {
   useEffect(() => {
     setLlm(searchParams.get("llm") ?? defaultLlmValue);
     setLlmIsLoading(false);
-  }, []);
+  }, [searchParams]);
 
   const [chatHistory, setChatHistory] = useState<
     { human: string; ai: string }[]
@@ -77,7 +80,7 @@ export function ChatWindow(props: { conversationId: string }) {
 
     let renderer = new Renderer();
     renderer.paragraph = (text) => {
-      return text + "\n";
+      return `${text}\n`;
     };
     renderer.list = (text) => {
       return `${text}\n\n`;
@@ -239,7 +242,7 @@ export function ChatWindow(props: { conversationId: string }) {
           <div className="flex items-center mb-2">
             <span className="shrink-0 mr-2">Powered by</span>
             {llmIsLoading ? (
-              <Spinner className="my-2"></Spinner>
+              <Spinner className="my-2" />
             ) : (
               <Select
                 value={llm}
@@ -317,9 +320,14 @@ export function ChatWindow(props: { conversationId: string }) {
           <a
             href="https://github.com/langchain-ai/chat-langchainjs"
             target="_blank"
+            rel="noreferrer"
             className="text-white flex items-center"
           >
-            <img src="/images/github-mark.svg" className="h-4 mr-1" />
+            <img
+              src="/images/github-mark.svg"
+              className="h-4 mr-1"
+              alt="GitHub Logo"
+            />
             <span>View Source</span>
           </a>
         </footer>
